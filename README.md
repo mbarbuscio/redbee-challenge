@@ -14,7 +14,7 @@ No actual user auth is provided. In a real-world scenario, an authority would au
   - Required Headers: (X-User, "username")
   - Returns: The boards for the user
 
-### GET /api/boards/:id                         
+### GET /api/boards/:id                         
   - Does: Gets a specific board
   - Receives: The Board Id
   - Required Headers: (X-User, "username")
@@ -32,13 +32,13 @@ No actual user auth is provided. In a real-world scenario, an authority would au
   - Required Headers: (X-User, "username")
   - Returns: An HTTP Result
 
-### POST /api/boards/:boardId/hashtags
+### POST /api/boards/:boardId/hashtags
   - Does: Adds a Hashtag Subscription to a board
   - Receives: The Board Id and a Json object, with the new subscription name { "hashtag":"New Hashtag" }
   - Required Headers: (X-User, "username")
   - Returns: An HTTP Result
   
-### DELETE /api/boards/:boardId/hashtags/:id
+### DELETE /api/boards/:boardId/hashtags/:id
   - Does: Deletes a subscription from a board
   - Receives: The Board Id and the Subscription Id
   - Required Headers: (X-User, "username")
