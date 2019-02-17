@@ -11,12 +11,12 @@ libraryDependencies += guice
 libraryDependencies += "org.scalatestplus.play" %% "scalatestplus-play" % "4.0.1" % Test
 libraryDependencies += "org.typelevel" %% "cats-core" % "1.6.0"
 libraryDependencies ++= Seq(
-  "mysql" % "mysql-connector-java" % "5.1.34",
+  "mysql" % "mysql-connector-java" % "8.0.13",
   "com.typesafe.slick" %% "slick" % "3.3.0",
   "com.h2database" % "h2" % "1.4.187",
   "org.slf4j" % "slf4j-nop" % "1.6.4",
   "com.typesafe.slick" %% "slick-hikaricp" % "3.3.0"
-  
+
 )
 libraryDependencies ++= Seq(
   "com.typesafe.play" %% "play-slick" % "4.0.0",
