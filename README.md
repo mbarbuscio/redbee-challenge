@@ -1,5 +1,12 @@
 # redbee-challenge
 
+Clone and Install a mySQL engine. Provide the connection details to the [application.conf](https://github.com/mbarbuscio/redbee-challenge/blob/master/challenge/conf/application.conf).
+
+Run the [SQL DDL Script](https://github.com/mbarbuscio/redbee-challenge/blob/master/sql/DDL.sql) to create the database.
+
+Open the [project](https://github.com/mbarbuscio/redbee-challenge/tree/master/challenge) and run with SBT
+
+Go to (http://localhost:9000) or call to (http://localhost:9000/api) with the methods below
 
 ## Assumptions
 
