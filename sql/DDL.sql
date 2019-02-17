@@ -1,8 +1,12 @@
+DROP SCHEMA IF EXISTS redbee;
+
 CREATE SCHEMA redbee;
 
 USE redbee;
 
-GRANT ALL PRIVILEGES ON *.* TO 'api.user'@'localhost' IDENTIFIED BY 'Pa$$w0rD';
+CREATE USER IF NOT EXISTS 'api.user'@'localhost' IDENTIFIED BY 'Pa$$w0rD';
+
+GRANT ALL PRIVILEGES ON redbee.* TO 'api.user'@'localhost';
 
 CREATE TABLE `Board` (
   `Id` bigint(20) NOT NULL AUTO_INCREMENT,

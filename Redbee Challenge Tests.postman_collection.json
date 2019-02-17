@@ -1,0 +1,670 @@
+{
+	"info": {
+		"_postman_id": "16644dac-a621-4b10-a340-21c819491b98",
+		"name": "Redbee Challenge Tests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Initial Amount of Boards",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "cef03e74-9d0f-431d-8f1d-9412c53e5e38",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.globals.set(\"boards-count\", pm.response.json().length); ",
+							"    ",
+							"    ",
+							"    pm.environment.set(\"valid-board-id\", pm.response.json()[0].id);",
+							"    ",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-User",
+						"type": "text",
+						"value": "SomeUser"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:9000/api/boards",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"api",
+						"boards"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create A Board",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3ad0f5c6-0ce2-480c-8c68-a768de5db6fb",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.globals.set(\"boards-count\", parseInt(pm.globals.get(\"boards-count\"))+1); ",
+							"",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-User",
+						"value": "SomeUser",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \n\t\"name\": \"Test Board\"\n}"
+				},
+				"url": {
+					"raw": "localhost:9000/api/boards",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"api",
+						"boards"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create A Second Board",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "13e5bdfa-aa25-4eea-941a-858e1d901cc7",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.globals.set(\"boards-count\", parseInt(pm.globals.get(\"boards-count\"))+1); ",
+							"    ",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-User",
+						"value": "SomeUser",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \n\t\"name\": \"Test Board 2\"\n}"
+				},
+				"url": {
+					"raw": "localhost:9000/api/boards",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"api",
+						"boards"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get My Boards",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "cef03e74-9d0f-431d-8f1d-9412c53e5e38",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"validate response\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    ",
+							"    pm.environment.set(\"valid-board-id\", pm.response.json()[0].id);",
+							"    ",
+							"    pm.expect(jsonData.length).to.eql(parseInt(pm.globals.get(\"boards-count\")));",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-User",
+						"value": "SomeUser",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:9000/api/boards",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"api",
+						"boards"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add a HashTag",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "95092c2f-651a-44db-aef8-8d384605f239",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-User",
+						"value": "SomeUser",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"hashtag\": \"fromApiTag1\"\n}"
+				},
+				"url": {
+					"raw": "localhost:9000/api/boards/{{valid-board-id}}/hashtags",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"api",
+						"boards",
+						"{{valid-board-id}}",
+						"hashtags"
+					]
+				},
+				"description": "May need to change the Id based on usage"
+			},
+			"response": []
+		},
+		{
+			"name": "Add another HashTag",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "35c6feed-c347-43b2-975b-9d9d2700c97d",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-User",
+						"value": "SomeUser",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"hashtag\": \"fromApiTag2\"\n}"
+				},
+				"url": {
+					"raw": "localhost:9000/api/boards/{{valid-board-id}}/hashtags",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"api",
+						"boards",
+						"{{valid-board-id}}",
+						"hashtags"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add a HashTag to a different Board",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4e54b175-4de5-4d8d-b24f-2c13a4ca5e8d",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-User",
+						"value": "SomeUser",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"hashtag\": \"fromApiTag3\"\n}"
+				},
+				"url": {
+					"raw": "localhost:9000/api/boards/{{valid-board-id}}/hashtags",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"api",
+						"boards",
+						"{{valid-board-id}}",
+						"hashtags"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Another HashTag to a different Board",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "691ac690-81e5-4a68-9b7d-c581a90a50fd",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-User",
+						"value": "SomeUser",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"hashtag\": \"fromApiTag4\"\n}"
+				},
+				"url": {
+					"raw": "localhost:9000/api/boards/{{valid-board-id}}/hashtags",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"api",
+						"boards",
+						"{{valid-board-id}}",
+						"hashtags"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get My Boards After Adding Tags",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4bf23a8c-4823-4aa2-8125-21ea197b1b8f",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"validate response\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    ",
+							"    pm.environment.set(\"valid-board-id\", pm.response.json()[0].id);",
+							"    ",
+							"    pm.expect(jsonData.length).to.eql(parseInt(pm.globals.get(\"boards-count\")));",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-User",
+						"value": "SomeUser",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:9000/api/boards",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"api",
+						"boards"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Valid Board Data for Deletion",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4bf23a8c-4823-4aa2-8125-21ea197b1b8f",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"    ",
+							"    pm.environment.set(\"valid-hashtag-id\", pm.response.json().hashtags[0].id);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-User",
+						"type": "text",
+						"value": "SomeUser"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:9000/api/boards/{{valid-board-id}}",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"api",
+						"boards",
+						"{{valid-board-id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a HashTag",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "efceccda-a9cb-4a5c-a75d-a154153422ee",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "X-User",
+						"value": "SomeUser",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:9000/api/boards/{{valid-board-id}}/hashtags/{{valid-hashtag-id}}",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"api",
+						"boards",
+						"{{valid-board-id}}",
+						"hashtags",
+						"{{valid-hashtag-id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a Board",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "bcf4e399-4979-4aff-959e-fbce6b2f8ea0",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.globals.set(\"boards-count\", parseInt(pm.globals.get(\"boards-count\"))-1); ",
+							"    pm.response.to.have.status(200);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "X-User",
+						"value": "SomeUser",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:9000/api/boards/{{valid-board-id}}",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"api",
+						"boards",
+						"{{valid-board-id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get My Boards After Deleting",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6efe8491-274c-4192-b181-27a98929d143",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"validate response\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.length).to.eql(parseInt(pm.globals.get(\"boards-count\")));",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-User",
+						"value": "SomeUser",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:9000/api/boards",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"api",
+						"boards"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
