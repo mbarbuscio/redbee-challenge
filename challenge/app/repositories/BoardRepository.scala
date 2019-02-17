@@ -31,9 +31,34 @@ object BoardRepository {
     db.executor.run(find.result.head)
   }
 
+  def deleteBoard(boardId: Long): Kleisli[Future, DataBasePool, Int] = Kleisli{ db =>
+    val delete = Board.table.filter(b => b.id === boardId).delete
+
+    (db.executor.run(delete))
+  }
+
+
   def getHashTags(boardId: Long): Kleisli[Future, DataBasePool, Seq[Hashtag]] = Kleisli{ db =>
     val find = Hashtag.table.filter(t => t.boardId === boardId)
 
     db.executor.run(find.result)
+  }
+
+  def addHashTag(boardId: Long, hashTag: String): Kleisli[Future, DataBasePool, Option[Int]] = Kleisli{ db =>
+    val insert = Hashtag.table ++= Seq(Hashtag(0,hashTag,boardId))
+
+    db.executor.run(insert).map{result => result map {x => x}}
+  }
+
+  def deleteHashTag(id: Long): Kleisli[Future, DataBasePool, Int] = Kleisli{ db =>
+    val delete = Hashtag.table.filter(t => t.id === id).delete
+
+    db.executor.run(delete)
+  }
+
+  def deleteHashTagsByBoard(boardId: Long): Kleisli[Future, DataBasePool, Int] = Kleisli{ db =>
+    val delete = Hashtag.table.filter(t => t.boardId === boardId).delete
+
+    db.executor.run(delete)
   }
 }

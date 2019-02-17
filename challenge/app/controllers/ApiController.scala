@@ -36,8 +36,30 @@ class ApiController @Inject()(cc: ControllerComponents, userHandler: userHandler
     }
   }
 
+  def deleteBoard(boardId: Long) = userHandler.async { request =>
+    BoardService.deleteBoard(boardId).map {
+      d => Ok
+    }
+  }
+
+  def addHashtag(boardId: Long) = userHandler.async { request =>
+    BoardService.AddHashtag(request.userName.get, boardId, addHashtagRequest(request.body.asJson.get).get).map {
+      h => Ok
+    }
+  }
+
+  def deleteHashTag(boardId: Long, id: Long) = userHandler.async { request =>
+    BoardService.DeleteHashtag(request.userName.get, boardId, id).map {
+      d => Ok
+    }
+  }
+
   private def newBoardRequest(json: JsValue, user: String): JsResult[Board] = {
     val name = (json \ "name").as[String];
     JsSuccess(Board(0,name,user))
+  }
+
+  private def addHashtagRequest(json: JsValue): JsResult[String] = {
+    JsSuccess((json \ "hashtag").as[String])
   }
 }
