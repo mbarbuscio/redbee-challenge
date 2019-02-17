@@ -16,8 +16,12 @@ object BoardService {
     Some("Works")
   }
 
-  def getAllBoards(): Future[Seq[Board]] = {
-    BoardRepository.getBoards("SomeUser").run(DBConnection)
+  def getAllBoards(userId: String): Future[Seq[Board]] = {
+    BoardRepository.getBoards(userId).run(DBConnection)
+  }
+
+  def createBoard(board: Board): Future[Option[Int]] = {
+    BoardRepository.createBoard(board).run(DBConnection)
   }
 
 }

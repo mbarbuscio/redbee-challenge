@@ -17,4 +17,10 @@ object BoardRepository {
 
     db.executor.run(findByUser.result).map(bs => bs)
   }
+
+  def createBoard(board: Board): Kleisli[Future, DataBasePool, Option[Int]] = Kleisli{ db =>
+    val insert = Board.table ++= Seq(board)
+
+    db.executor.run(insert).map{result => result map { x => x }}
+  }
 }
