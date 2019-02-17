@@ -6,7 +6,9 @@ Run the [SQL DDL Script](https://github.com/mbarbuscio/redbee-challenge/blob/mas
 
 Open the [project](https://github.com/mbarbuscio/redbee-challenge/tree/master/challenge) and run with SBT
 
-Go to (http://localhost:9000) or call to (http://localhost:9000/api) with the methods below
+Go to (http://localhost:9000), call to (http://localhost:9000/api) with the methods below or run the [Postman Test Bed](https://github.com/mbarbuscio/redbee-challenge/blob/master/Redbee%20Challenge%20Tests.postman_collection.json)
+
+
 
 ## Assumptions
 
