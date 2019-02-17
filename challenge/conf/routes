@@ -10,4 +10,5 @@ GET     /                           controllers.HomeController.index
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
 
 GET /api/boards                     controllers.ApiController.getBoards
+GET /api/boards/:id                 controllers.ApiController.getBoard(id: Long)
 POST /api/boards                    controllers.ApiController.createBoard

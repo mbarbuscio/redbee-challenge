@@ -7,25 +7,32 @@ import play.api.mvc._
 import play.api.libs.json._
 import play.mvc.Http.RequestBody
 import services.BoardService
-import models.{Board}
+import models.Board
+import utils.actions.{NewBoardRequest, UserRequest, userHandlerAction}
 
 import scala.concurrent._
 import ExecutionContext.Implicits.global
 
 @Singleton
-class ApiController @Inject()(cc: ControllerComponents) extends AbstractController(cc) {
+class ApiController @Inject()(cc: ControllerComponents, userHandler: userHandlerAction) extends AbstractController(cc) {
 
-  def getBoards() = Action.async { implicit  request: Request[AnyContent] =>
-      BoardService.getAllBoards(request.headers.get("X-User").get) map { boards =>
+  def getBoards() = userHandler.async { request: UserRequest[AnyContent] =>
+    BoardService.getAllBoards(request.userName.get).map {
+      boards => {
         Ok(Json.toJson(boards))
       }
+    }
   }
 
-  def createBoard() = Action.async { implicit request: Request[AnyContent] =>
-    val body = request.body.asJson;
-
-    BoardService.createBoard(newBoardRequest(body.get, request.headers.get("X-User").get).get).map {
+  def createBoard() = userHandler.async { request =>
+    BoardService.createBoard(newBoardRequest(request.body.asJson.get, request.userName.get).get).map {
       o => Ok
+    }
+  }
+
+  def getBoard(id: Long) = userHandler.async { request =>
+    BoardService.getBoard(request.userName.get, id).map {
+      board => Ok(Json.toJson(board))
     }
   }
 

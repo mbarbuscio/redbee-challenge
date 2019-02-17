@@ -26,3 +26,9 @@ object Board {
   implicit val format = Json.format[Board]
 
 }
+
+case class BoardDTO(board: Board, hashtags: Seq[Hashtag])
+
+object BoardDTO {
+  implicit val format = Json.format[BoardDTO]
+}
